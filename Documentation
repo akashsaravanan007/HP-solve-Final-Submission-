@@ -1,0 +1,241 @@
+We can use a combination of online data mining, natural language processing (NLP), machine learning (ML)/deep learning (DL), and Python to answer 
+the issue statement and obtain the desired conclusion. Here's an example of how to crawl social media channels, classify posts, discover features/problems,
+and identify feelings for HP consumer printers:
+
+
+
+// Code using python
+import requests
+import json
+from bs4 import BeautifulSoup
+from textblob import TextBlob
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Step 1: Web Data Mining - Crawling social media platforms
+
+def crawl_social_media():
+    # Your code to crawl social media platforms and retrieve posts about HP printers
+    pass
+
+# Step 2: NLP - Classify/tag posts with printer brand or model
+
+def classify_posts(posts):
+    # Your code to classify/tag posts with printer brand or model
+    pass
+
+# Step 3: NLP - Detect feature or problem in the posts
+
+def detect_feature_problem(posts):
+    # Your code to detect feature or problem in the posts
+    pass
+
+# Step 4: NLP - Identify sentiments in the posts
+
+def identify_sentiments(posts):
+    sentiments = []
+    for post in posts:
+        blob = TextBlob(post)
+        sentiment = blob.sentiment.polarity
+        if sentiment > 0:
+            sentiment_label = 'Appreciation'
+        elif sentiment < 0:
+            sentiment_label = 'Complaint'
+        else:
+            sentiment_label = 'Suggestion'
+        sentiments.append(sentiment_label)
+    return sentiments
+
+# Step 5: ML/DL - Train a sentiment classifier (optional)
+
+def train_sentiment_classifier(data):
+    # Your code to train a sentiment classifier using ML/DL techniques (e.g., logistic regression)
+    pass
+
+# Step 6: Query the knowledge graph
+
+def query_knowledge_graph(query):
+    # Your code to query the knowledge graph and retrieve relevant information
+    pass
+
+# Main function
+
+def main():
+    # Step 1: Crawl social media platforms
+    posts = crawl_social_media()
+
+    # Step 2: Classify/tag posts with printer brand or model
+    classified_posts = classify_posts(posts)
+
+    # Step 3: Detect feature or problem in the posts
+    feature_problems = detect_feature_problem(posts)
+
+    # Step 4: Identify sentiments in the posts
+    sentiments = identify_sentiments(posts)
+
+    # Step 5: Train a sentiment classifier (optional)
+    sentiment_classifier = train_sentiment_classifier(posts)
+
+    # Step 6: Query the knowledge graph
+    query = "list all posts talking about wifi issue in printer model X or brand Y"
+    results = query_knowledge_graph(query)
+
+    # Display or process the results as needed
+    print(results)
+
+----------------------------------------------------------------
+
+Please keep in mind that the code above shows the broad structure and processes necessary in solving the problem.
+You would need to fill in the gaps with your own implementation based on the social media platforms you want to crawl,
+the NLP and ML/DL techniques you want to use, and the knowledge graph format you want to produce. You may also need to install the necessary libraries. 
+(e.g., requests, bs4, textblob, scikit-learn) using pip before running the code.
+
+
+----------------------------------
+// Remaining code of the complete implementation:
+
+
+# Step 1: Web Data Mining - Crawling social media platforms
+
+def crawl_social_media():
+    # Your code to crawl social media platforms and retrieve posts about HP printers
+    # For demonstration purposes, let's assume we retrieve posts from a hypothetical API
+    response = requests.get('https://api.example.com/posts')
+    data = json.loads(response.text)
+    posts = [post['text'] for post in data['posts']]
+    return posts
+
+# Step 2: NLP - Classify/tag posts with printer brand or model
+
+def classify_posts(posts):
+    # Your code to classify/tag posts with printer brand or model
+    # For demonstration purposes, let's assume we classify based on keyword matching
+    classified_posts = []
+    for post in posts:
+        if 'HP' in post:
+            classified_posts.append({'text': post, 'brand': 'HP'})
+        else:
+            classified_posts.append({'text': post, 'brand': 'Other'})
+    return classified_posts
+
+# Step 3: NLP - Detect feature or problem in the posts
+
+def detect_feature_problem(posts):
+    # Your code to detect feature or problem in the posts
+    # For demonstration purposes, let's assume we detect based on keyword matching
+    feature_problems = []
+    for post in posts:
+        if 'wifi issue' in post:
+            feature_problems.append({'text': post, 'issue': 'Wifi Issue'})
+        else:
+            feature_problems.append({'text': post, 'issue': 'Other'})
+    return feature_problems
+
+# Step 5: ML/DL - Train a sentiment classifier (optional)
+
+def train_sentiment_classifier(data):
+    # Your code to train a sentiment classifier using ML/DL techniques (e.g., logistic regression)
+    # For demonstration purposes, let's assume we use logistic regression with TF-IDF features
+    texts = [post['text'] for post in data]
+    labels = [post['sentiment'] for post in data]
+    
+    vectorizer = TfidfVectorizer()
+    X = vectorizer.fit_transform(texts)
+    X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.2)
+    
+    classifier = LogisticRegression()
+    classifier.fit(X_train, y_train)
+    
+    return classifier
+
+# Step 6: Query the knowledge graph
+
+def query_knowledge_graph(query):
+    # Your code to query the knowledge graph and retrieve relevant information
+    # For demonstration purposes, let's assume we have a predefined knowledge graph stored in a dictionary
+    knowledge_graph = {
+        'posts': [
+            {'text': 'Printer X has a wifi issue', 'brand': 'HP', 'issue': 'Wifi Issue', 'sentiment': 'Complaint'},
+            {'text': 'I love my HP printer', 'brand': 'HP', 'issue': 'Other', 'sentiment': 'Appreciation'}
+        ]
+    }
+    
+    # Perform the query
+    results = []
+    for post in knowledge_graph['posts']:
+        if query in post.values():
+            results.append(post)
+    
+    return results
+
+# Main function
+
+def main():
+    # Step 1: Crawl social media platforms
+    posts = crawl_social_media()
+
+    # Step 2: Classify/tag posts with printer brand or model
+    classified_posts = classify_posts(posts)
+
+    # Step 3: Detect feature or problem in the posts
+    feature_problems = detect_feature_problem(posts)
+
+    # Step 4: Identify sentiments in the posts
+    sentiments = identify_sentiments(posts)
+
+    # Step 5: Train a sentiment classifier (optional)
+    sentiment_classifier = train_sentiment_classifier(posts)
+
+    # Step 6: Query the knowledge graph
+    query = input("Enter your query: ")
+    results = query_knowledge_graph(query)
+
+    # Display the results
+    if results:
+        print("Results:")
+        for result in results:
+            print(result)
+    else:
+        print("No results found for the query.")
+
+if __name__ == '__main__':
+    main()
+-----------------------------------
+
+Certainly! Here's an example code snippet for crawling social media networks for postings on HP printers using web data mining:
+In the preceding code, we use the requests library to perform a GET request to a fictitious social network page. The BeautifulSoup library is then used to parse the HTML content of the page. We locate all posts or comments about HP printers and collect the text from each one. Finally, we save the post text in the posts_text list. You can further process this data based on your needs.
+
+
+// code using web data mining
+import requests
+from bs4 import BeautifulSoup
+
+def crawl_social_media():
+    # Your code to crawl social media platforms and retrieve posts about HP printers
+    # For demonstration purposes, let's assume we retrieve posts from a hypothetical website
+    
+    # Send a request to the social media page
+    response = requests.get('https://www.example.com/social-media')
+
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Find all the posts or comments related to HP printers
+    posts = soup.find_all('div', class_='post')
+
+    # Extract the text from each post
+    posts_text = [post.text for post in posts]
+
+    return posts_text
+
+# Example usage
+posts = crawl_social_media()
+print(posts)
+
+
+Please keep in mind that the example code assumes a fictional social media website, and you must adjust it to the specific social media networks you want to crawl.
+You may also need to manage pagination, authentication, and other factors based on the APIs or terms of service of the target platforms.
+
+----------------------------------------------------------------------------
+
